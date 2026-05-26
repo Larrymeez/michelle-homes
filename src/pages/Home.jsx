@@ -9,18 +9,14 @@ import ApartmentCard from "../components/ApartmentCard";
 import BookingForm from "../components/BookingForm";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-
+import {FaFacebookF,FaInstagram,FaWhatsapp,FaTiktok,} from "react-icons/fa";
 
 function Home() {
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowTop(true);
-      } else {
-        setShowTop(false);
-      }
+      setShowTop(window.scrollY > 400);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -31,13 +27,12 @@ function Home() {
   }, []);
 
   const pricing = {
-  night: "KES 2,500 / night",
-  day: "KES 2,000 / day staycation",
-};
+    night: "KES 2,500 / night",
+    day: "KES 2,000 / day staycation",
+  };
 
   return (
     <div>
-
       {/* ================= HERO ================= */}
       <section
         className="relative min-h-screen bg-cover bg-center"
@@ -45,34 +40,94 @@ function Home() {
           backgroundImage: `url(${heroImage})`,
         }}
       >
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/55"></div>
 
         <Navbar />
 
-        <motion.div
-          className="relative z-10 flex min-h-screen items-center justify-center text-center px-6"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <div>
-            <h1 className="text-5xl md:text-7xl font-serif font-semibold text-white mb-6 tracking-wide">
+        <div className="relative z-10 max-w-7xl mx-auto min-h-screen px-6 grid md:grid-cols-2 items-center gap-10">
+          {/* LEFT */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <p className="text-amber-400 uppercase tracking-[4px] text-sm mb-4">
+              Your perfect stay in Thika
+            </p>
+
+            <h1 className="text-5xl md:text-7xl font-serif font-semibold text-white leading-tight mb-6">
               Michelle Homes
             </h1>
 
-            <p className="text-lg md:text-xl text-stone-100 max-w-2xl mx-auto leading-relaxed">
-              Elegant and comfortable Airbnb stays in Thika.
-              Your perfect home away from home.
+            <p className="text-lg md:text-xl text-stone-100 leading-relaxed max-w-xl">
+              Elegant Airbnb stays designed for comfort,
+              privacy and convenience in the heart of Thika.
             </p>
 
-            <a
-              href="#apartments"
-              className="inline-block mt-8 bg-white text-stone-900 px-8 py-3 rounded-xl font-medium shadow-lg transition duration-300 hover:bg-amber-700 hover:text-white active:bg-amber-800"
-            >
-              View Apartments
-            </a>
-          </div>
-        </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <a
+                href="#apartments"
+                className="bg-amber-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg hover:bg-amber-800 transition"
+              >
+                View Apartments
+              </a>
+
+              <a
+                href="#booking"
+                className="border border-white text-white px-8 py-3 rounded-xl font-medium hover:bg-white hover:text-stone-900 transition"
+              >
+                Book Your Stay
+              </a>
+            </div>
+          </motion.div>
+
+          {/* RIGHT */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2 }}
+            className="flex justify-center md:justify-end"
+          >
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 w-full max-w-sm shadow-2xl">
+              <p className="text-white text-sm tracking-wide mb-4">
+                📍 Thika, Kenya
+              </p>
+
+              <h3 className="text-2xl font-serif text-white mb-6">
+                Executive & Deluxe Suites
+              </h3>
+
+              <div className="space-y-4">
+                <div className="flex justify-between border-b border-white/20 pb-3">
+                  <span className="text-stone-200">
+                    Night Stay
+                  </span>
+
+                  <span className="text-amber-400 font-semibold">
+                    KES 2,500
+                  </span>
+                </div>
+
+                <div className="flex justify-between border-b border-white/20 pb-3">
+                  <span className="text-stone-200">
+                    Day Staycation
+                  </span>
+
+                  <span className="text-amber-400 font-semibold">
+                    KES 2,000
+                  </span>
+                </div>
+
+                <a
+                  href="#booking"
+                  className="block text-center bg-amber-700 text-white py-3 rounded-xl hover:bg-amber-800 transition mt-6"
+                >
+                  Reserve Now
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ================= APARTMENTS ================= */}
@@ -95,97 +150,104 @@ function Home() {
 
           <div className="grid md:grid-cols-2 gap-10">
             <ApartmentCard
+  id="executive"
   images={[
     apartment1,
     apartment2,
     apartment3,
     apartment4,
-    apartment5
+    apartment5,
   ]}
   title="Executive Suite"
-  description="Beautifully furnished apartment with fast Wi-Fi, smart TV and a cozy relaxing space."
-  price={pricing.night}
-  status="Available"
+  description="Beautifully furnished apartment with fast Wi-Fi and smart TV."
+  price="KES 2,500 / night"
 />
-            <ApartmentCard
-              images={[apartment2]}
-              title="Deluxe Apartment"
-              description="Elegant spacious apartment with a modern kitchen and peaceful atmosphere."
-              price={pricing.night}
-              status="Available"
-            />
+
+<ApartmentCard
+  id="deluxe"
+  images={[apartment2]}
+  title="Deluxe Apartment"
+  description="Elegant spacious apartment with peaceful atmosphere."
+  price="KES 2,500 / night"
+/>
           </div>
         </div>
       </motion.section>
 
       {/* ================= BOOKING ================= */}
-      <BookingForm />
+      <div id="booking">
+        <BookingForm />
+      </div>
 
       {/* ================= WHY CHOOSE US ================= */}
       <section className="bg-white py-24 px-6">
-  <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.h2
+            className="text-5xl font-serif text-stone-800 mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Why Choose Michelle Homes
+          </motion.h2>
 
-    <motion.h2
-      className="text-5xl font-serif text-stone-800 mb-4"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-    >
-      Why Choose Michelle Homes
-    </motion.h2>
+          <motion.p
+            className="text-stone-600 mb-14 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            We don’t just offer a place to stay — we offer comfort,
+            privacy, and a premium experience in Thika.
+          </motion.p>
 
-    <motion.p
-      className="text-stone-600 mb-14 max-w-2xl mx-auto"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.2 }}
-    >
-      We don’t just offer a place to stay — we offer comfort, privacy, and a premium experience in Thika.
-    </motion.p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="p-8 rounded-2xl bg-stone-100 shadow-sm hover:shadow-xl transition"
+            >
+              <div className="text-4xl mb-4">🏡</div>
+              <h3 className="text-xl font-semibold mb-2">
+                Home Comfort
+              </h3>
 
-    <div className="grid md:grid-cols-3 gap-8">
+              <p className="text-stone-600">
+                Fully furnished spaces designed to feel like home.
+              </p>
+            </motion.div>
 
-      {/* Card 1 */}
-      <motion.div
-        whileHover={{ y: -8 }}
-        className="p-8 rounded-2xl bg-stone-100 shadow-sm hover:shadow-xl transition"
-      >
-        <div className="text-4xl mb-4">🏡</div>
-        <h3 className="text-xl font-semibold mb-2">Home Comfort</h3>
-        <p className="text-stone-600">
-          Fully furnished spaces designed to feel like home from the moment you walk in.
-        </p>
-      </motion.div>
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="p-8 rounded-2xl bg-stone-100 shadow-sm hover:shadow-xl transition"
+            >
+              <div className="text-4xl mb-4">📍</div>
+              <h3 className="text-xl font-semibold mb-2">
+                Prime Location
+              </h3>
 
-      {/* Card 2 */}
-      <motion.div
-        whileHover={{ y: -8 }}
-        className="p-8 rounded-2xl bg-stone-100 shadow-sm hover:shadow-xl transition"
-      >
-        <div className="text-4xl mb-4">📍</div>
-        <h3 className="text-xl font-semibold mb-2">Prime Location</h3>
-        <p className="text-stone-600">
-          Located in the heart of Thika with easy access to transport, shops, and town.
-        </p>
-      </motion.div>
+              <p className="text-stone-600">
+                Easy access to transport, shops and town.
+              </p>
+            </motion.div>
 
-      {/* Card 3 */}
-      <motion.div
-        whileHover={{ y: -8 }}
-        className="p-8 rounded-2xl bg-stone-100 shadow-sm hover:shadow-xl transition"
-      >
-        <div className="text-4xl mb-4">🔒</div>
-        <h3 className="text-xl font-semibold mb-2">Safe & Private</h3>
-        <p className="text-stone-600">
-          Secure building with privacy and peace of mind throughout your stay.
-        </p>
-      </motion.div>
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="p-8 rounded-2xl bg-stone-100 shadow-sm hover:shadow-xl transition"
+            >
+              <div className="text-4xl mb-4">🔒</div>
+              <h3 className="text-xl font-semibold mb-2">
+                Safe & Private
+              </h3>
 
-    </div>
-  </div>
-</section>
+              <p className="text-stone-600">
+                Secure building with peace and privacy.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* ================= GALLERY ================= */}
       <section className="bg-stone-100 py-20 px-6">
@@ -218,85 +280,105 @@ function Home() {
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="bg-stone-900 text-white py-14 px-6">
+<footer className="bg-stone-900 text-white py-14 px-6">
   <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-
-    {/* Brand */}
+    {/* BRAND */}
     <div>
       <h3 className="text-2xl font-serif mb-3">
         Michelle Homes
       </h3>
-      <p className="text-stone-400">
-        Premium Airbnb stays in Thika designed for comfort, privacy, and style.
+
+      <p className="text-stone-400 leading-relaxed">
+        Premium Airbnb stays in Thika offering comfort,
+        elegance and convenience for both night stays
+        and day staycations.
       </p>
     </div>
 
-    {/* Links */}
+    {/* CONTACT */}
     <div>
-      <h4 className="font-semibold mb-3">Quick Links</h4>
-      <ul className="space-y-2 text-stone-400">
-        <li className="hover:text-white cursor-pointer">Home</li>
-        <li className="hover:text-white cursor-pointer">Apartments</li>
-        <li className="hover:text-white cursor-pointer">Booking</li>
-      </ul>
-    </div>
+      <h4 className="text-lg font-semibold mb-4">
+        Contact Us
+      </h4>
 
-    {/* Socials */}
-    <div>
-      <h4 className="font-semibold mb-3">Follow Us</h4>
-
-      <div className="flex gap-4 mt-3">
-
-        {/* Instagram */}
-        <a href="#" className="hover:scale-110 transition">
-          <svg className="w-6 h-6 fill-white hover:fill-pink-400" viewBox="0 0 24 24">
-            <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5zM17.8 6.2a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"/>
-          </svg>
-        </a>
-
-        {/* Facebook */}
-        <a href="#" className="hover:scale-110 transition">
-          <svg className="w-6 h-6 fill-white hover:fill-blue-400" viewBox="0 0 24 24">
-            <path d="M22 12a10 10 0 1 0-11.5 9.95v-7.05H8.9V12h1.6V9.8c0-1.6.95-2.5 2.4-2.5.7 0 1.4.1 1.4.1v1.5h-.8c-.8 0-1 .5-1 1v2h1.7l-.3 2.9h-1.4V22A10 10 0 0 0 22 12z"/>
-          </svg>
-        </a>
-
-        {/* WhatsApp */}
-        <a href="#" className="hover:scale-110 transition">
-          <svg className="w-6 h-6 fill-white hover:fill-green-400" viewBox="0 0 24 24">
-            <path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.5 18.3L0 24l5.9-1.5A12 12 0 0 0 12 24a12 12 0 0 0 8.5-20.5zM12 22a10 10 0 0 1-5.1-1.4l-.4-.2-3.5.9.9-3.4-.2-.4A10 10 0 1 1 12 22zm5.5-7.2c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 .9s-.3 0-.6-.2a7.5 7.5 0 0 1-2.2-1.4 8.3 8.3 0 0 1-1.5-1.9c-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.5-.1-.7 0-.2-.7-1.6-1-2.2-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1 1-1 2.4s1 2.7 1.2 2.9c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.3z"/>
-          </svg>
-        </a>
-
+      <div className="space-y-3 text-stone-400">
+        <p>📍 Thika, Kenya</p>
+        <p>📞 +254 700 000 000</p>
+        <p>✉️ michellehomes@gmail.com</p>
       </div>
     </div>
 
+    {/* SOCIALS */}
+    <div>
+      <h4 className="text-lg font-semibold mb-4">
+        Follow Us
+      </h4>
+
+      <div className="flex gap-4 text-xl">
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noreferrer"
+          className="bg-white/10 p-3 rounded-full hover:bg-blue-600 transition transform hover:scale-110"
+        >
+          <FaFacebookF />
+        </a>
+
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noreferrer"
+          className="bg-white/10 p-3 rounded-full hover:bg-pink-600 transition transform hover:scale-110"
+        >
+          <FaInstagram />
+        </a>
+
+        <a
+          href="https://wa.me/254700000000"
+          target="_blank"
+          rel="noreferrer"
+          className="bg-white/10 p-3 rounded-full hover:bg-green-500 transition transform hover:scale-110"
+        >
+          <FaWhatsapp />
+        </a>
+
+        <a
+          href="https://tiktok.com"
+          target="_blank"
+          rel="noreferrer"
+          className="bg-white/10 p-3 rounded-full hover:bg-stone-700 transition transform hover:scale-110"
+        >
+          <FaTiktok />
+        </a>
+      </div>
+    </div>
   </div>
 
-  <div className="text-center text-stone-500 mt-12 text-sm">
-    © {new Date().getFullYear()} Michelle Homes. All rights reserved.
+  {/* BOTTOM */}
+  <div className="border-t border-stone-700 mt-10 pt-6 text-center text-stone-500 text-sm">
+    © {new Date().getFullYear()} Michelle Homes.
+    All rights reserved.
   </div>
 </footer>
-   <a
-  href="https://wa.me/254700000000"
-  target="_blank"
-  rel="noreferrer"
-  className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-50 transition transform hover:scale-110"
->
-  <svg
-    className="w-6 h-6"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.5 18.3L0 24l5.9-1.5A12 12 0 0 0 12 24a12 12 0 0 0 8.5-20.5zM12 22a10 10 0 0 1-5.1-1.4l-.4-.2-3.5.9.9-3.4-.2-.4A10 10 0 1 1 12 22z"/>
-  </svg>
-</a>
 
- {/* ================= SCROLL TO TOP BUTTON ================= */}
+      {/* WHATSAPP */}
+      <a
+        href="https://wa.me/254700000000"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-50 transition transform hover:scale-110"
+      >
+        💬
+      </a>
+
+      {/* SCROLL TOP */}
       {showTop && (
         <button
           onClick={() =>
-            window.scrollTo({ top: 0, behavior: "smooth" })
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
           }
           className="fixed bottom-6 left-6 bg-stone-900 text-white p-3 rounded-full shadow-xl hover:bg-stone-700 transition z-50"
         >
