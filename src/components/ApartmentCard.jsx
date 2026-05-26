@@ -1,21 +1,33 @@
+import { motion } from "framer-motion";
+
 function ApartmentCard({
   image,
   title,
-  price,
   description,
+  price,
   status,
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-64 object-cover"
-      />
+    <motion.div
+      whileHover={{ y: -10, scale: 1.02 }}
+      transition={{ duration: 0.3 }}
+      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition duration-300"
+    >
+      {/* Apartment image */}
+      <div className="overflow-hidden">
+        <motion.img
+          src={image}
+          alt={title}
+          className="w-full h-72 object-cover"
+          whileHover={{ scale: 1.08 }}
+          transition={{ duration: 0.4 }}
+        />
+      </div>
 
+      {/* Content */}
       <div className="p-6">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-3xl font-serif text-stone-800">
+          <h3 className="text-2xl font-serif text-stone-800">
             {title}
           </h3>
 
@@ -34,15 +46,17 @@ function ApartmentCard({
           {description}
         </p>
 
-        <p className="text-lg font-semibold text-amber-700 mb-5">
-          {price}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-lg font-semibold text-amber-700">
+            {price}
+          </p>
 
-        <button className="bg-amber-700 text-white px-6 py-3 rounded-xl hover:bg-amber-800 transition">
-          Book Now
-        </button>
+          <button className="bg-stone-800 text-white px-5 py-2 rounded-xl hover:bg-amber-700 transition duration-300">
+            Book Now
+          </button>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
