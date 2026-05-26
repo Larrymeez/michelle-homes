@@ -1,11 +1,7 @@
+import Home from "./pages/Home";
+
 function App() {
-  return (
-    <div className="min-h-screen bg-stone-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-stone-800">
-        Michelle Homes – Thika
-      </h1>
-    </div>
-  );
+  return <Home />;
 }
 
 export default App;
