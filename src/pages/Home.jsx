@@ -1,18 +1,39 @@
+import Navbar from "../components/Navbar";
+import heroImage from "../assets/hero.jpg";
+
 function Home() {
   return (
-    <div className="min-h-screen bg-stone-100">
-      <section className="flex flex-col items-center justify-center text-center px-6 py-24">
-        <h1 className="text-5xl font-bold text-stone-800 mb-4">
-          Michelle Homes
-        </h1>
+    <div>
+      <section
+        className="relative min-h-screen bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${heroImage})`,
+        }}
+      >
+        {/* dark overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-        <p className="text-lg text-stone-600 max-w-2xl">
-          Elegant and comfortable stays in Thika. Your home away from home.
-        </p>
+        <Navbar />
 
-        <button className="mt-8 bg-stone-800 text-white px-6 py-3 rounded-xl hover:bg-stone-700 transition">
-          View Apartments
-        </button>
+        <div className="relative z-10 flex min-h-screen items-center justify-center text-center px-6">
+          <div>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              Michelle Homes
+            </h1>
+
+            <p className="text-lg md:text-xl text-stone-100 max-w-2xl mx-auto">
+              Elegant and comfortable Airbnb stays in Thika.
+              Your perfect home away from home.
+            </p>
+
+            <a
+              href="#apartments"
+              className="inline-block mt-8 bg-white text-stone-900 px-8 py-3 rounded-xl font-semibold hover:bg-stone-100 transition"
+            >
+              View Apartments
+            </a>
+          </div>
+        </div>
       </section>
     </div>
   );
